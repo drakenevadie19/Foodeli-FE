@@ -1,0 +1,23 @@
+<!-- <p>restaurant-listing works!</p> -->
+
+<main class="main-content my-gap">
+  <div class="restaurant-grid">
+    <div class="restaurant-card" *ngFor="let restaurant of restaurantList">
+      <div class="restaurant-image">
+        <!-- Get random displaying image from assets folder -->
+        <img [src]="'assets/restaurant-pics' + getRandomImage()" alt="Restaurant Image">
+      </div>
+
+      <div class="restaurant-details">
+        <h3 class="restaurant-name">{{ restaurant.name }}</h3>
+        <div class="restaurant-rating">
+          <span class="rating"><i class="fa fa-star"></i>4.5</span>
+          <span class="rating-count">(500+)</span>
+        </div>
+
+        <!-- When clicking, forward to this restaurant's food catalogue page -->
+        <button class="order-btn" (click)="onOrderNowClick(restaurant.id)">Order Now</button>
+      </div>
+    </div>
+  </div>
+</main>
