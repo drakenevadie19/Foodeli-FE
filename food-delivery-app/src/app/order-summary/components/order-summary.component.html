@@ -1,1 +1,38 @@
-<p>order-summary works!</p>
+<!-- <p>order-summary works!</p> -->
+
+<div class="order-summary">
+  <h1>Order Summary</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of obj.foodItemsList">
+        <td>{{ item.itemName }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>&#x20b9; {{ item.price }}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2">Total</td>
+        <td>&#x20b9; {{ total }}</td>
+      </tr>
+    </tfoot>
+  </table>
+  <button class="checkout-button" (click)="saveOrder()">Place Order</button>
+</div>
+
+<!-- When placing order successfully, there should be a dialog box shown. -->
+<div class="dialog-container" *ngIf="showDialog">
+  <div class="dialog-box">
+    <h2>Order Placed!</h2>
+    <p>Your order has been successfully placed.</p>
+    <button class="close-button" (click)="closeDialog()">Close</button>
+  </div>
+</div>
+
