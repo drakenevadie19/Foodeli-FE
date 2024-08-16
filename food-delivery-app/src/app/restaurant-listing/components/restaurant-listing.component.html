@@ -5,7 +5,7 @@
     <div class="restaurant-card" *ngFor="let restaurant of restaurantList">
       <div class="restaurant-image">
         <!-- Get random displaying image from assets folder -->
-        <img [src]="'assets/restaurant-pics' + getRandomImage()" alt="Restaurant Image">
+        <img [src]="'/assets/restaurant-pics/' + getRandomImage()" alt="Restaurant Image">
       </div>
 
       <div class="restaurant-details">

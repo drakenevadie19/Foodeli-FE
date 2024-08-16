@@ -57,5 +57,6 @@ export class RestaurantListingComponent {
 
   onOrderNowClick(id: number) {
     this.router.navigate(['/food-catalogue', id]);
+    // this.router.navigate(`${'/food-catalogue/' + id}`);
   }
 }

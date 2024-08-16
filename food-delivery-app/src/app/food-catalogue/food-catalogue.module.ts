@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FoodCatalogueRoutingModule } from './food-catalogue-routing.module';
-import { FoodCatalogueComponent } from './food-catalogue.component';
+import { FoodCatalogueComponent } from './components/food-catalogue.component';
 
 
 @NgModule({
