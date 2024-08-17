@@ -20,10 +20,10 @@ export class OrderSummaryComponent {
     => Get all of them our from route
    */
 
-    orderSummary?: OrderDTO;
-    obj: any;
-    total?: any;
-    showDialog: boolean = false;
+  orderSummary?: OrderDTO;
+  obj: any;
+  total: any;
+  showDialog: boolean = false;
 
   // route: ActivatedRoute => fetch the complete data and save it to local variable.
   constructor(private route: ActivatedRoute, private router: Router, private orderService: OrderService) { }
@@ -31,7 +31,9 @@ export class OrderSummaryComponent {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
+    // console.log(this.route.snapshot);
     const data = this.route.snapshot.queryParams['data'];
+    // console.log(data);
     // data consists of foodItemList and restaurant details
     // Parse this data and save in obj variable, set userID as 1, add it to order
     this.obj = JSON.parse(data);
@@ -39,7 +41,7 @@ export class OrderSummaryComponent {
     this.orderSummary = this.obj;
 
     // Calculate the total of the bill from the restaurant.
-    this.total = this.orderSummary.foodItemList.reduce((accumulator, currentValue) => {
+    this.total = this.orderSummary.foodItemsList.reduce((accumulator, currentValue) => {
       // For each food in the cart, quantity of food * price of food
       // accumulator is total price so far (tong cho den hien tai)
       return accumulator + (currentValue.quantity * currentValue.price);

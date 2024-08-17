@@ -73,8 +73,8 @@ export class FoodCatalogueComponent {
 
     this.orderSummary.foodItemsList = this.foodItemCart;
     if (this.foodItemResponse.restaurant != null) this.orderSummary.restaurant = this.foodItemResponse.restaurant;
-    console.log(this.orderSummary);
-    this.router.navigate(['/orderSummary', { queryParams: { data: JSON.stringify(this.orderSummary) } }])
+    // console.log(JSON.stringify(this.orderSummary));
+    this.router.navigate(['/orderSummary'], { queryParams: { data: JSON.stringify(this.orderSummary) } });
   }
 
   increment(food: any) {
