@@ -1,4 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  background-color: #F1FAFB;
+  padding: 10px;
+  width: calc(100% - 20px);
+}
 
 .restaurant-grid {
   display: grid;
@@ -62,73 +68,6 @@
   background-color: #0093c6;
 }
 
-
-.header {
-  /* background-color: #00A7E1; */
-  background-color: lightskyblue;
-  color: #fff;
-  padding: 20px 0;
-}
-
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.header-logo {
-  font-size: 36px;
-  font-weight: bold;
-  margin: 0;
-}
-
-.header-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-.header-nav li {
-  margin-right: 20px;
-}
-
-.header-nav a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.header-nav a:hover {
-  color: #E7F9FF;
-}
-
-@media only screen and (max-width: 768px) {
-  .header-container {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .header-nav {
-    margin-top: 20px;
-  }
-
-  .header-nav ul {
-    display: block;
-  }
-
-  .header-nav li {
-    margin: 10px 0;
-  }
-}
-
-
-Copy code
 .user-circle {
 display: flex;
 align-items: center;
@@ -143,4 +82,20 @@ background-color: #f2f2f2;
 font-size: 14px;
 font-weight: bold;
 margin-left: 10px;
+}
+
+.custom-button {
+  background-color: #4993FA;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.custom-button:hover {
+  background-color: #8099FF;
 }

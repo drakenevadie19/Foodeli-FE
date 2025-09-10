@@ -50,6 +50,8 @@
   cursor: pointer;
   width: 30px;
   height: 30px;
+  border-radius: 20px;
+  font-weight: 700;
 }
 
 .minus-button:hover,

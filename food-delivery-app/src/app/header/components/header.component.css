@@ -1,3 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Trade+Winds&display=swap');
+
+.header {
+  background-color: #A0E4F1;
+  color: #fff;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 40px);
+  /* max-width: 1200px; */
+  /* margin: 0 auto; */
+  padding: 0 20px;
+}
+
+.header-logo {
+  font-size: 36px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.header-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.header-nav li {
+  margin-right: 20px;
+}
+
+.header-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.header-nav a:hover {
+  color: #E7F9FF;
+}
+
+@media only screen and (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .header-nav {
+    margin-top: 20px;
+  }
+
+  .header-nav ul {
+    display: block;
+  }
+
+  .header-nav li {
+    margin: 10px 0;
+  }
+}
+
+
+.ava {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.header-logo {
+  font-size: 2em;
+  font-style: italic;
+
+  font-family: "Trade Winds", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .user-avatar {
   display: flex;
   align-items: center;
@@ -14,4 +98,8 @@
 .username {
   font-size: 14px;
   font-weight: bold;
+}
+
+.sign-in-button {
+  border: 1px solid black;
 }

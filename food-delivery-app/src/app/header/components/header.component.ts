@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   username = 'Iris';
+  isLoggedIn = true;
 
   constructor(private router: Router) { }
 

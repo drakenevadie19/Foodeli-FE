@@ -2,13 +2,22 @@
 
 <header class="header">
   <div class="header-container">
-      <h1 (click)="toggleHome()" class="header-logo">Foodeli</h1>
+      <div class="ava">
+        <img src="../../../assets/avatar-pics/icon.png" alt="User Avatar" />
+        <p (click)="toggleHome()" class="header-logo">Foodeli</p>
+      </div>
       <nav class="header-nav">
-        <div class="user-avatar">
+        <div *ngIf="isLoggedIn; else elseBlock" class="user-avatar">
           <img src="../../../assets/avatar-pics/avatar.jpg" alt="User Avatar" />
           <!-- Binding username from userInfo Database (call from header.component.ts) -->
           <span class="username">Hey {{ username }}</span>
         </div>
+
+        <ng-template #elseBlock>
+          <button class="custom-button">
+            Sign In
+          </button>
+        </ng-template>
       </nav>
   </div>
 </header>

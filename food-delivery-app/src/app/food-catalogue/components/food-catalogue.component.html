@@ -21,11 +21,11 @@
           </div>
           <div class="food-quantity">
             <!-- Only display - button if visitor chose this dish (if food.quantity > 0) -->
-              <button class="minus-button" *ngIf="food.quantity > 0" (click)="decrement(food)">-</button>
+              <button class="minus-button" *ngIf="food.quantity > 0" (click)="decrement(food)">&#45;</button>
               <!-- Display number of chosen for this dish -->
               <div class="quantity-label">{{food.quantity}}</div>
               <!-- Increase number of chosen for this dish (food) by 1 -->
-              <button class="plus-button" (click)="increment(food)">+</button>
+              <button class="plus-button" (click)="increment(food)">&#43;</button>
           </div>
       </div>
   </div>
