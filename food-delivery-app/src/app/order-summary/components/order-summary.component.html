@@ -14,17 +14,17 @@
       <tr *ngFor="let item of obj.foodItemsList">
         <td>{{ item.itemName }}</td>
         <td>{{ item.quantity }}</td>
-        <td>&#x20b9; {{ item.price }}</td>
+        <td>&#36; {{ item.price }}</td>
       </tr>
     </tbody>
     <tfoot>
       <tr>
         <td colspan="2">Total</td>
-        <td>&#x20b9; {{ total }}</td>
+        <td>&#36; {{ total }}</td>
       </tr>
     </tfoot>
   </table>
-  <button class="checkout-button" (click)="saveOrder()">Place Order</button>
+  <button class="checkout-button" [disabled]="obj.foodItemsList?.length === 0" (click)="saveOrder()">Place Order</button>
 </div>
 
 <!-- When placing order successfully, there should be a dialog box shown. -->

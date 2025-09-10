@@ -7,13 +7,13 @@ import { catchError, Observable, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class FooditemService {
-  private apiUrl = API_URL_FC + '/foodCatalogue/fetchRestaurantAndFoodItemsById/';
+  private apiUrl = API_URL_FC + '/foodCatalogue/fetchRestaurantAndFoodItemsById';
 
   constructor(private http: HttpClient) { }
 
   // Get each restaurant's menu
   getFoodItemsByRestaurantId(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl+id}`)
+    return this.http.get<any>(`${this.apiUrl}/${id}`)
       .pipe(
         catchError(this.handleError)
       );

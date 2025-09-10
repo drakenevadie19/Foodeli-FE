@@ -59,6 +59,7 @@ export class FoodCatalogueComponent {
   getFoodItemsFromRestaurantID(restaurantId: number) {
     this.foodItemService.getFoodItemsByRestaurantId(this.restaurantId).subscribe(
       data => {
+        // console.log("Getting restaurant and food item list by restaurant ID successful", data);
         this.foodItemResponse = data;
       }
     )
