@@ -3,6 +3,7 @@ import { FooditemService } from '../service/fooditem.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FoodCatalogue } from '../../shared/models/FoodCatalogue';
 import { FoodItem } from '../../shared/models/FoodItem';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-food-catalogue',
@@ -34,10 +35,13 @@ export class FoodCatalogueComponent {
   // route: fetch ID from activatedRoute =>Whoever call you, you will be using the activated route,
   //   which is going to provide you information from where you have been getting routed
   //   Use to get id from function of onOrderNowClicked(): this.router.navigate(['/food-catalogue', id]);
-  constructor(private foodItemService: FooditemService, private router:Router, private route: ActivatedRoute) { }
+  constructor(private foodItemService: FooditemService, private router:Router, private route: ActivatedRoute, private titleService: Title) { }
 
   // Therer are 2 tasks to do: get ID and get all restaurant and foodItem list using this service
   ngOnInit(): void {
+    // Set title
+    this.titleService.setTitle('Foodeli | Menu');
+
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.route.paramMap.subscribe(params => {

@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Restaurant } from '../../shared/models/restaurant';
 import { Router } from '@angular/router';
 import { RestaurantService } from '../service/restaurant.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-restaurant-listing',
   templateUrl: './restaurant-listing.component.html',
   styleUrl: './restaurant-listing.component.css'
 })
-export class RestaurantListingComponent {
+export class RestaurantListingComponent implements OnInit {
   /**
    * Need to get:
       1. restaurantList: list of all available restaurants.
@@ -20,18 +21,20 @@ export class RestaurantListingComponent {
   //  go to tsconfig.json, add line: "strictPropertyInitialization": false,
   public restaurantList: Restaurant[];
 
+  // We need 2 services here:
+  //  - route: when clicking on OrderNow, forward to foodCatalogue page => need router
+  //  - restaurantService: to call to defined services in restaurant.service.ts (getAllRestaurants())
+  //  - title: to set page title each time rendering this component
+  constructor(private router: Router, private restaurantService: RestaurantService, private titleService: Title) { }
+
   // When restaurant listing component gets loaded, we need all data to be loaded
   //  => In this method, call to service and get list of all restaurants and populate it here
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.getAllRestaurants();
+    this.titleService.setTitle('Foodeli | Restaurants');
   }
-
-  // We need 2 services here:
-  //  - route: when clicking on OrderNow, forward to foodCatalogue page => need router
-  //  - restaurantService: to call to defined services in restaurant.service.ts (getAllRestaurants())
-  constructor(private router: Router, private restaurantService: RestaurantService) { }
 
   // Call on ngOnInit
   getAllRestaurants() {

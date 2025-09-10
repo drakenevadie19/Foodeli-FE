@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrderService } from '../service/order.service';
 import { OrderDTO } from '../models/OrderDTO';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-order-summary',
@@ -26,9 +27,12 @@ export class OrderSummaryComponent {
   showDialog: boolean = false;
 
   // route: ActivatedRoute => fetch the complete data and save it to local variable.
-  constructor(private route: ActivatedRoute, private router: Router, private orderService: OrderService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private orderService: OrderService, private titleService: Title) { }
 
   ngOnInit(): void {
+    // Set title
+    this.titleService.setTitle('Foodeli | Order Summary');
+
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     // console.log(this.route.snapshot);
