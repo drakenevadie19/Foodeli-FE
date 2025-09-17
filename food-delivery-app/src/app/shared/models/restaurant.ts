@@ -16,4 +16,5 @@ export interface Restaurant {
   address?: string;
   city?: string;
   restaurantDescription?: string;
+  owner_id?: number;
 }

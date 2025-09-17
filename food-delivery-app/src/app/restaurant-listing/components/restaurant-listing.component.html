@@ -1,24 +1,39 @@
 <!-- <p>restaurant-listing works!</p> -->
 
-<main class="main-content my-gap">
-  <h1>Restaurant List</h1>
-  <div class="restaurant-grid">
-    <div class="restaurant-card" *ngFor="let restaurant of restaurantList">
-      <div class="restaurant-image">
-        <!-- Get random displaying image from assets folder -->
-        <img [src]="'/assets/restaurant-pics/' + getRandomImage()" alt="Restaurant Image">
-      </div>
+<div *ngIf="loading" class="loading">Loading restaurants…</div>
 
-      <div class="restaurant-details">
-        <h3 class="restaurant-name">{{ restaurant.name }}</h3>
-        <div class="restaurant-rating">
-          <span class="rating"><i class="fa fa-star"></i>4.5</span>
-          <span class="rating-count">(500+)</span>
+<!-- Show server-down UI when serverError is true -->
+<ng-container *ngIf="serverError; else normalContent">
+  <section class="server-down">
+    <img src="/assets/errors/server-error.png" alt="Server Down" class="server-down-image">
+    <h2>We can’t reach the server</h2>
+    <p>Our server may be restarting or temporarily unavailable. Please try again or retry in next 30 minutes.</p>
+    <p *ngIf="errorMessage">Details: {{ errorMessage }}</p>
+    <button (click)="retry()" class="custom-button try-again-button">Try again</button>
+  </section>
+</ng-container>
+
+<ng-template class="main-content my-gap" #normalContent>
+  <section *ngIf="!loading && !serverError">
+    <h1>Restaurant List</h1>
+    <div class="restaurant-grid">
+      <div class="restaurant-card" *ngFor="let restaurant of restaurantList">
+        <div class="restaurant-image">
+          <!-- Get random displaying image from assets folder -->
+          <img [src]="'/assets/restaurant-pics/' + getRandomImage()" alt="Restaurant Image">
         </div>
 
-        <!-- When clicking, forward to this restaurant's food catalogue page -->
-        <button class="order-btn" (click)="onOrderNowClick(restaurant.id)">View Menu</button>
+        <div class="restaurant-details">
+          <h3 class="restaurant-name">{{ restaurant.name }}</h3>
+          <div class="restaurant-rating">
+            <span class="rating"><i class="fa fa-star"></i>4.5</span>
+            <span class="rating-count">(500+)</span>
+          </div>
+
+          <!-- When clicking, forward to this restaurant's food catalogue page -->
+          <button class="order-btn" (click)="onOrderNowClick(restaurant.id)">View Menu</button>
+        </div>
       </div>
     </div>
-  </div>
-</main>
+  </section>
+</ng-template>

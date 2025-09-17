@@ -3,11 +3,14 @@ import { Restaurant } from '../../shared/models/restaurant';
 import { Router } from '@angular/router';
 import { RestaurantService } from '../service/restaurant.service';
 import { Title } from '@angular/platform-browser';
+import { TimeoutError, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { timeout, catchError, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-restaurant-listing',
   templateUrl: './restaurant-listing.component.html',
-  styleUrl: './restaurant-listing.component.css'
+  styleUrl: './restaurant-listing.component.css',
 })
 export class RestaurantListingComponent implements OnInit {
   /**
@@ -21,11 +24,21 @@ export class RestaurantListingComponent implements OnInit {
   //  go to tsconfig.json, add line: "strictPropertyInitialization": false,
   public restaurantList: Restaurant[];
 
+  // For Loading and Error handling
+  loading = false;
+  serverError = false; // <- use this in your HTML
+  errorMessage = ''; // optional: show details
+  // private sub?: Subscription;
+
   // We need 2 services here:
   //  - route: when clicking on OrderNow, forward to foodCatalogue page => need router
   //  - restaurantService: to call to defined services in restaurant.service.ts (getAllRestaurants())
   //  - title: to set page title each time rendering this component
-  constructor(private router: Router, private restaurantService: RestaurantService, private titleService: Title) { }
+  constructor(
+    private router: Router,
+    private restaurantService: RestaurantService,
+    private titleService: Title
+  ) {}
 
   // When restaurant listing component gets loaded, we need all data to be loaded
   //  => In this method, call to service and get list of all restaurants and populate it here
@@ -38,14 +51,41 @@ export class RestaurantListingComponent implements OnInit {
 
   // Call on ngOnInit
   getAllRestaurants() {
+    this.loading = true;
+    this.serverError = false;
+    this.errorMessage = '';
+
     // Since the return type of getAllRestaurants() method is Observable => you have to subscribe it
     //  => Subscribe her: for all data that I am getting here on subscription to this method (a GET call to localhost:9091 to RestaurantList MS)
     //    whenever get the data, add it to restaurantList
-    this.restaurantService.getAllRestaurants().subscribe(
-      data => {
-        this.restaurantList = data;
-      }
-    )
+    this.restaurantService
+      .getAllRestaurants()
+      .pipe(
+        timeout(5000),
+        catchError((err: unknown) => {
+          const http = err as HttpErrorResponse;
+          const isTimeout = err instanceof TimeoutError || (err as any)?.name === 'TimeoutError';
+          const isServerDown =
+            isTimeout || http?.status === 0 || (http?.status >= 500 && http?.status < 600);
+
+          this.serverError = true;
+          if (isServerDown) {                     // <- toggle the flag
+            this.errorMessage = isTimeout ? 'Request timed out.' :
+            http?.message || 'Network/Server error.';
+            return [];
+          }
+
+          return throwError(() => err);
+        }),
+        finalize(() => this.loading = false)
+      ).subscribe((data) => {
+        // console.log('Restaurant List: ', data);
+        this.restaurantList = data.data;
+      });
+  }
+
+  retry(): void {
+    this.getAllRestaurants();
   }
 
   getRandomImage(): string {
@@ -55,7 +95,7 @@ export class RestaurantListingComponent implements OnInit {
   }
 
   getRandomNumber(min: number, max: number): number {
-    return Math.floor(Math.random() * (max-min+1)) + min;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   onOrderNowClick(id: number) {
